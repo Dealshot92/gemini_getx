@@ -1,5 +1,5 @@
 
-import '../../core/constants/services/log_service.dart';
+import '../../core/services/log_service.dart';
 import '../../domain/repositories/gemini_talk_repository.dart';
 import '../datasources/remote/http_service.dart';
 

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart';
 import 'package:http_interceptor/http/intercepted_client.dart';
-import '../../../core/constants.dart';
+import '../../../core/constants/constants.dart';
 import '../../models/gemini_talk_model.dart';
 import 'http_helper.dart';
 

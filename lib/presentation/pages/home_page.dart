@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../core/constants/services/log_service.dart';
-import '../../core/constants/services/utils_service.dart';
+import '../../core/services/log_service.dart';
+import '../../core/services/utils_service.dart';
 import '../../data/repositories/gemini_talk_repository_impl.dart';
 import '../../domain/usecases/gemini_text_and_image_usecase.dart';
 import '../../domain/usecases/gemini_text_only_usecase.dart';
 
 class HomePage extends StatefulWidget {
+  static const String id = 'home_page';
   const HomePage({super.key});
 
   @override
@@ -14,9 +15,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-  GeminiTextOnlyUseCase textOnlyUseCase = GeminiTextOnlyUseCase(GeminiTalkRepositoryImpl());
-  GeminiTextAndImageUseCase textAndImageUseCase = GeminiTextAndImageUseCase(GeminiTalkRepositoryImpl());
+  GeminiTextOnlyUseCase textOnlyUseCase =
+  GeminiTextOnlyUseCase(GeminiTalkRepositoryImpl());
+  GeminiTextAndImageUseCase textAndImageUseCase =
+  GeminiTextAndImageUseCase(GeminiTalkRepositoryImpl());
 
   apiTextOnly() async {
     var text = "What is the best way to learn Flutter development?";
@@ -42,23 +44,17 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         padding: const EdgeInsets.all(20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            MaterialButton(
-              color: Colors.blue,
-              onPressed: () {
-                apiTextOnly();
-              },
-              child: const Text("Text Only Input"),
+            Expanded(
+              child: ListView(),
             ),
-            MaterialButton(
-              color: Colors.blue,
-              onPressed: () {
-                apiTextAndImage();
-              },
-              child: const Text("Text And Image Input"),
+            Container(
+              height: 50,
+              color: Colors.grey[300],
+              child: TextField(),
             ),
+
           ],
         ),
       ),
