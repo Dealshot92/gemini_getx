@@ -2,8 +2,7 @@ import 'package:http_interceptor/http/interceptor_contract.dart';
 import 'package:http_interceptor/models/request_data.dart';
 import 'package:http_interceptor/models/response_data.dart';
 import 'package:http_interceptor/models/retry_policy.dart';
-
-import 'log_service.dart';
+import '../../../core/constants/services/log_service.dart';
 
 
 class HttpInterceptor implements InterceptorContract {
@@ -89,5 +88,3 @@ class UnauthorisedException extends HttpException {
 class InvalidInputException extends HttpException {
   InvalidInputException([String? message]) : super(message, "Invalid Input: ");
 }
-
-//https://codewithandrea.com/articles/flutter-exception-handling-try-catch-result-type/
