@@ -1,9 +1,7 @@
-abstract class GeminiTalkRepository {
-  Future<String> onTextOnly(String text) async {
-    return '';
-  }
+import 'package:dartz/dartz.dart';
 
-  Future<String> onTextAndImage(String text, String base64) async {
-    return '';
-  }
+abstract class GeminiTalkRepository {
+  Future<Either<String, String>> onTextOnly(String text);
+
+  Future<Either<String, String>> onTextAndImage(String text, String base64);
 }
