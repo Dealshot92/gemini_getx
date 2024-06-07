@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gemini_getx/presentation/controllers/starter_controller.dart';
+import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
 import 'home_page.dart';
@@ -11,25 +13,17 @@ class StarterPage extends StatefulWidget {
 }
 
 class _StarterPageState extends State<StarterPage> {
-  late VideoPlayerController videoPlayerController;
+  final starterController = Get.find<StarterController>();
 
   @override
   void initState() {
     super.initState();
-    videoPlayerController =
-    VideoPlayerController.asset("assets/videos/gemini_video.mp4")
-      ..initialize().then((_) {
-        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-        setState(() {});
-      });
-
-    videoPlayerController.play();
-    videoPlayerController.setLooping(true);
+    starterController.initVideoPlayer();
   }
 
   @override
   void dispose() {
-    videoPlayerController.dispose();
+    starterController.stopVideoPlayer();
     super.dispose();
   }
 
@@ -50,32 +44,33 @@ class _StarterPageState extends State<StarterPage> {
                 ),
               ),
               Expanded(
-                child: videoPlayerController.value.isInitialized
-                    ? VideoPlayer(videoPlayerController)
+                child:
+                starterController.videoPlayerController.value.isInitialized
+                    ? VideoPlayer(starterController.videoPlayerController)
                     : Container(),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Navigator.pushReplacementNamed(context, HomePage.id);
+                      // Get.offNamed();
                     },
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey, width: 2),
                         borderRadius: BorderRadius.circular(25),
-
                       ),
-
-                      // height: 50,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             'Chat with Gemini ',
-                            style: TextStyle(color: Colors.grey[400], fontSize: 18),
+                            style: TextStyle(
+                                color: Colors.grey[400], fontSize: 18),
                           ),
                           const Icon(
                             Icons.arrow_forward,

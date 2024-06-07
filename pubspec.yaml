@@ -14,12 +14,22 @@ dependencies:
 
 
   cupertino_icons: ^1.0.6
+  # network
+  http: ^0.13.3
   http_interceptor: ^1.0.2
+  dartz: ^0.10.1
   logger: ^1.1.0
-  cached_network_image: ^3.3.1
+
+  # file
   image_picker: ^1.1.1
   video_player: ^2.8.6
-  dartz: ^0.10.1
+
+  # speech
+  speech_to_text: ^6.6.1
+  flutter_tts: ^4.0.2
+
+  # getX
+  get: ^4.6.6
 
 dev_dependencies:
   flutter_test:
