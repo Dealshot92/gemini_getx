@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:gemini_getx/data/datasources/local/hive_service.dart';
 import 'package:get/get.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
-import '../../core/constants/constants.dart';
 import '../../core/services/log_service.dart';
 import '../../core/services/utils_service.dart';
 import '../../data/models/message_model.dart';
@@ -31,14 +31,24 @@ class HomeController extends GetxController {
   bool speechEnabled = false;
   FlutterTts flutterTts = FlutterTts();
 
+  bool isLoading=false;
+
+  loadHistoryMessages(){
+    var historyMessages=HiveService.getHistoryMessages();
+
+    messages=historyMessages;
+    update();
+  }
+
+
   apiTextOnly(String text) async {
     var either = await textOnlyUseCase.call(text);
     either.fold((l) {
       LogService.d(l);
-      updateMessages(MessageModel(isMine: false, message: l));
+      updateMessages(MessageModel(isMine: false, message: l), false);
     }, (r) async {
       LogService.d(r);
-      updateMessages(MessageModel(isMine: false, message: r));
+      updateMessages(MessageModel(isMine: false, message: r), false);
     });
   }
 
@@ -46,28 +56,30 @@ class HomeController extends GetxController {
     var either = await textAndImageUseCase.call(text, base64);
     either.fold((l) {
       LogService.d(l);
-      updateMessages(MessageModel(isMine: false, message: l));
+      updateMessages(MessageModel(isMine: false, message: l), false);
     }, (r) async {
       LogService.d(r);
-      updateMessages(MessageModel(isMine: false, message: r));
+      updateMessages(MessageModel(isMine: false, message: r), false);
     });
   }
 
-  updateMessages(MessageModel messageModel) {
+  updateMessages(MessageModel messageModel, bool isLoading) {
+    this.isLoading=isLoading;
     messages.add(messageModel);
     update();
 
     // #todo - save MessageModel to NoSQL
+    HiveService.saveMessage(messageModel);
   }
 
   onSendPressed(String text) async {
     if (pickedImage == null) {
       apiTextOnly(text);
-      updateMessages(MessageModel(isMine: true, message: text));
+      updateMessages(MessageModel(isMine: true, message: text), true);
     } else {
       apiTextAndImage(text, pickedImage!);
       updateMessages(
-          MessageModel(isMine: true, message: text, base64: pickedImage));
+          MessageModel(isMine: true, message: text, base64: pickedImage), true);
     }
     textController.clear();
     onRemovedImage();

@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class StarterController extends GetxController {
   late VideoPlayerController videoPlayerController;
-
-  initVideoPlayer() {
+  FlutterTts flutterTts = FlutterTts();
+  initVideoPlayer() async{
     videoPlayerController =
     VideoPlayerController.asset("assets/videos/gemini_video.mp4")
       ..initialize().then((_) {
@@ -18,5 +19,14 @@ class StarterController extends GetxController {
   stopVideoPlayer(){
     videoPlayerController.dispose();
 
+  }
+  Future speakTTS(String text) async {
+    var result = await flutterTts.speak(text);
+    // if (result == 1) setState(() => ttsState = TtsState.playing);
+  }
+
+  Future stopTTS() async {
+    var result = await flutterTts.stop();
+    // if (result == 1) setState(() => ttsState = TtsState.stopped);
   }
 }
