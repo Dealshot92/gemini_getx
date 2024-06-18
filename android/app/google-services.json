@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "223432338855",
+    "project_id": "gemini-ai-d4df6",
+    "storage_bucket": "gemini-ai-d4df6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223432338855:android:6cfa24c0dddb2660865a82",
+        "android_client_info": {
+          "package_name": "com.example.gemini_getx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "223432338855-1uv9u4mqnr1sb5499pgtfc8q7o7jg6ql.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gemini_getx",
+            "certificate_hash": "e1cde6e20754d7c806aec8b4c3d0155d4f38c544"
+          }
+        },
+        {
+          "client_id": "223432338855-ggvipdq0ch5l4u7f4fkv9rgs1u1k6690.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHKIeXDDcHqcc1Ye6ZSVnRnnKLnc2Uldg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "223432338855-ggvipdq0ch5l4u7f4fkv9rgs1u1k6690.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

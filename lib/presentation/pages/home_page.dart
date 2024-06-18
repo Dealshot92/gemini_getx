@@ -1,6 +1,9 @@
 import 'dart:convert';
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gemini_getx/core/services/auth_service.dart';
 import 'package:gemini_getx/presentation/controllers/home_controller.dart';
 import 'package:gemini_getx/presentation/widgets/item_gemini_message.dart';
 import 'package:gemini_getx/presentation/widgets/loading_view.dart';
@@ -63,12 +66,47 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const SizedBox(
-                      height: 45,
-                      child: Image(
-                        image: AssetImage('assets/images/gemini_logo.png'),
-                        fit: BoxFit.cover,
-                      ),
+                    Stack(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              height: 45,
+                              child: Image(
+                                image:
+                                    AssetImage('assets/images/gemini_logo.png'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            GestureDetector(
+                              onTap: (){
+                                homeController.logOutDialog(context);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.only(top: 10, right: 16),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: CachedNetworkImage(
+                                    height: 40,
+                                    width: 40,
+                                    imageUrl: AuthService.currentUser().photoURL!,
+                                    placeholder: (context, url)=> const Image(
+                                      image: AssetImage('assets/images/ic_person.png'),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        )
+                      ],
                     ),
                     Expanded(
                       child: Container(
